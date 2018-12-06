@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset="utf-8")
+    link(rel="stylesheet", href="/layui/css/layui.css")
+    link(rel="stylesheet", href="/css/header.css")
+    
+    block css
+
+    script(src="/layui/layui.js")
+  body
+    
+    include header
+
+    //- content
+    block contents
+      h1 hello world
+    
+
+    //- script
+    block scripts
+    
