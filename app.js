@@ -21,7 +21,9 @@ const CONFIG = {
 app
     .use(logger())
     .use(session(CONFIG, app))
-    .use(body())
+    .use(body({
+      multipart:true
+    }))
     .use(static(join(__dirname, 'public')))
     .use(views(join(__dirname, 'views'), {
       extension: 'pug'
