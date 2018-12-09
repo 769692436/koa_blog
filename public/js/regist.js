@@ -15,12 +15,14 @@ layui.use(['element', 'layer', 'form'], function(){
     }
   });
   console.log($('.layui-tab-item.layui-show .sub-btn'));
-  $('.layui-tab-item.layui-show #regist-form .sub-btn').on('click', function(){
-    var formElement = document.querySelector('.layui-tab-item.layui-show .layui-form');
-    var formData = new FormData(formElement);
+  $('.layui-tab-item.layui-show .sub-btn').on('click', function(){
+    var formElement = $('.layui-tab-item.layui-show .layui-form');
+    var url = formElement.data('url');
+    var formData = new FormData(formElement[0]);
+    console.log(formData.get('username'));
     $.ajax({
       type: 'post',
-      url: '/user/reg',
+      url: url,
       data: formData,
       processData: false,
       contentType: false,
