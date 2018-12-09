@@ -34,6 +34,7 @@ exports.reg = async (ctx) => {
 }
 
 exports.login = async (ctx) => {
+  console.log(ctx.request.body);
   let { username, password } = ctx.request.body;
   await new Promise((res, rej) => {
     User.find({ username }, (err, data) => {

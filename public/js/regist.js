@@ -31,6 +31,10 @@ layui.use(['element', 'layer', 'form'], function(){
           case 'reg_success': layer.msg('注册成功！');break;
           case 'reg_failed': layer.msg('用户名已被注册！');break;
           case 'reg_error': layer.msg('注册失败，请刷新页面重试！');break;
+          case 'login_success': layer.msg('登录成功！');break;
+          case 'password_error': layer.msg('密码错误！');break;
+          case 'user_no_exist': layer.msg('用户不存在！');break;
+          case 'login_error': layer.msg('因未知原因登录失败！');break;
           default: layer.msg('服务器没有回应！');
         }
         setTimeout(function(){
