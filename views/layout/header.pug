@@ -19,22 +19,26 @@
           dd
             a(href="javascript:;") vue.js
     ul.layui-nav.blog-user.layui-bg-black
-      li.layui-nav-item
-        a(href="/user/login") 登录
-      li.layui-nav-item
-        a(href="/user/reg") 注册
-    //-ul.layui-nav.blog-user.layui-bg-black
-      li.layui-nav-item
-        a(href="#") 个人中心
-          span.layui-badge-dot
-      li.layui-nav-item
-        a(href="#") 
-          img().layui-nav-img
-          | 我
-        dl.layui-nav-child
-          dd
-            a(href="javascript:;") 修改信息
-          dd
-            a(href="javscript:;") 安全管理
-          dd
-            a(href="javscript:;") 退出登录 
+      if session && !session.isNew
+        li.layui-nav-item
+          a(href="#") 个人中心
+            span.layui-badge-dot
+        li.layui-nav-item
+          a(href="#") 
+            img(src=session.avatar).layui-nav-img
+            = session.username
+          dl.layui-nav-child
+            dd
+              a(href="javascript:;") 修改信息
+            dd
+              a(href="javscript:;") 安全管理
+            dd
+              a(href="/user/logout") 退出登录 
+      else
+        li.layui-nav-item
+          a(href="/user/login") 登录
+        li.layui-nav-item
+          a(href="/user/reg") 注册
+.layui-container.row
+  button.btn-add-article.layui-btn.layui-btn-normal.layui-col-md-offset11 添加文章
+  

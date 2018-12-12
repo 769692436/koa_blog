@@ -1,4 +1,4 @@
-const User = require('../model/userModel');
+const User = require('../module/userModel');
 const crypto = require('../utils/encrypt.js');
 
 exports.reg = async (ctx) => {
@@ -81,4 +81,32 @@ exports.login = async (ctx) => {
       ctx.body = {status: 'login_error', url: '/user/login'};
     }
   });
+}
+
+exports.logout = async(ctx) => {
+  ctx.session = null;
+  ctx.cookies.set("username", null, {
+      maxAge: 0
+  });
+  ctx.cookies.set("userId", null, {
+      maxAge: 0
+  });
+  // 重定向 到根路由 ---首页
+  ctx.redirect("/");
+}
+
+exports.keepLogin = async (ctx, next) => {
+  if (ctx.session.isNew) {
+      //从未登录过
+      if (ctx.cookies.get("userId")) {
+          //cookie有，session 没有
+          //更新一下session
+          ctx.session = {
+              username: ctx.cookies.get("username"),
+              userId: ctx.cookies.get("userId"),
+
+          };
+      }
+  }
+  await next();
 }

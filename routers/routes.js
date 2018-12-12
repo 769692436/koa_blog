@@ -3,8 +3,9 @@ const router = new Router;
 
 const user = require('../control/userController');
 
-router.get('/', async (ctx, next) => {
-  await ctx.render('index');
+router.get('/', user.keepLogin, async (ctx, next) => {
+  console.log(ctx.session);
+  await ctx.render('index', {session: ctx.session});
 });
 
 router.get(/^\/user\/(reg|login)/, async (ctx) => {
@@ -18,6 +19,8 @@ router.get(/^\/user\/(reg|login)/, async (ctx) => {
 router.post('/user/reg', user.reg);
 //登录
 router.post('/user/login', user.login);
+
+router.get('/user/logout', user.logout);
 
 
 module.exports = router;
