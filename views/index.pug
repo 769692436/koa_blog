@@ -1,8 +1,35 @@
 extends ./layout/layout
 
+block css
+  link(rel="stylesheet", href="/css/index.css")
 block content
+  .layui-container.row
+    a(href="/article/add").btn-add-article.layui-btn.layui-btn-normal.layui-col-md-offset11 添加文章
   .layui-container.main
     .layui-row.layui-col-space15
-      .layui-col-8
+      .layui-col-md8
+        ul.article-list
+          li
+            a.list-face
+              img()
+            h2
+              a.layui-badge 分类
+              a.article-title.ellipsis() 文章标题
+            .list-info 
+              a 用户名
+              span 2018-12-12
+              span.list-reply
+                i(title="评论").layui-icon.layui-icon-dialogue
+          li
+            a.list-face
+              img()
+            h2
+              a.layui-badge 分类
+              a.article-title.ellipsis() 文章标题
+            .list-info 
+              a 用户名
+              span 2018-12-12
+              span.list-reply
+                i(title="评论").layui-icon.layui-icon-dialogue
 block scripts
-  script(src="/js/index.js")
+  script(src="/js/common.js")
