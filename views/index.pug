@@ -3,33 +3,31 @@ extends ./layout/layout
 block css
   link(rel="stylesheet", href="/css/index.css")
 block content
-  .layui-container.row
-    a(href="/article/add").btn-add-article.layui-btn.layui-btn-normal.layui-col-md-offset11 添加文章
+  if !session.isNew && session
+    .layui-container.row
+      a(href="/article/add").btn-add-article.layui-btn.layui-btn-normal.layui-col-md-offset11 添加文章
   .layui-container.main
     .layui-row.layui-col-space15
       .layui-col-md8
         ul.article-list
-          li
-            a.list-face
-              img()
-            h2
-              a.layui-badge 分类
-              a.article-title.ellipsis() 文章标题
-            .list-info 
-              a 用户名
-              span 2018-12-12
-              span.list-reply
-                i(title="评论").layui-icon.layui-icon-dialogue
-          li
-            a.list-face
-              img()
-            h2
-              a.layui-badge 分类
-              a.article-title.ellipsis() 文章标题
-            .list-info 
-              a 用户名
-              span 2018-12-12
-              span.list-reply
-                i(title="评论").layui-icon.layui-icon-dialogue
+          each item in artList
+            li
+              a.list-face
+                img(src=item.author.avatar, alt=item.author)
+              h2
+                a.layui-badge= item.tips
+                a.article-title.ellipsis(href=`/article/${item._id}`)= item.title
+              .list-info 
+                a= item.author.username
+                span= item.createTime.toLocaleString()
+                span.list-reply
+                  i(title="评论").layui-icon.layui-icon-dialogue
+            
+          
+        include ./layout/laypage
+        //- 右侧公告
+      include ./layout/right_tag  
+  
 block scripts
   script(src="/js/common.js")
+  script(src="/js/laypage.js")
