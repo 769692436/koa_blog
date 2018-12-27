@@ -67,3 +67,16 @@ exports.list = async (ctx) => {
         maxNum  //文章总数目
     });
 }
+
+exports.detail = async (ctx) => {
+  let _id  = ctx.params.id;
+
+  let article = await Article
+      .findById(_id)
+      .populate('author', 'username')
+      .then(data => {
+        
+      }, err => {
+
+      })
+}
