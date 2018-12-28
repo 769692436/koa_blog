@@ -3,6 +3,7 @@ const router = new Router;
 
 const user = require('../control/userController');
 const article = require('../control/articleController');
+const comment = require('../control/commentController');
 
 router.get('/', user.keepLogin, article.list);
 
@@ -24,6 +25,10 @@ router.get('/article/add', user.keepLogin, article.addPage);
 //提交文章内容
 router.post('/article/add', user.keepLogin, article.add);
 //处理文章列表路由
-router.get("/page/:id", article.list);
+router.get('/page/:id', article.list);
+//文章详情页
+router.get('/article/:id', article.detail);
+//发表评论
+router.post('/comment', comment.publish);
 
 module.exports = router;

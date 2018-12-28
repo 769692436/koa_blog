@@ -1,4 +1,6 @@
 const Article = require('../module/articleModel');
+const Comment = require('../module/commentModel');
+
 
 exports.addPage = async (ctx) => {
   if (ctx.session.isNew) {
@@ -75,8 +77,22 @@ exports.detail = async (ctx) => {
       .findById(_id)
       .populate('author', 'username')
       .then(data => {
-        
+        // console.log(data);
+        return data;
       }, err => {
-
-      })
+        console.log('获取文章报错：', err);
+      });
+  let comment = await Comment
+      .find({article: _id})
+      .sort("-createTime")
+      .populate("author", "username avatar")
+      .then(data => data, err => {
+          console.log("报错")
+      });
+  await ctx.render('article', {
+    session: ctx.session,
+    title: '文章详情',
+    article,
+    comment
+  })
 }

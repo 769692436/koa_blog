@@ -11,7 +11,8 @@ const articleSchema = new Schema({
     author : {
         type : ObjectId,
         ref : "users"  //关联users表
-    } //作者
+    }, //作者
+    commentNum : Number  //评论
 }, {
     versionKey : false,
     timestamps : {

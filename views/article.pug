@@ -1,7 +1,6 @@
 extends ./layout/layout
 
 block css
-  link(rel="stylesheet", href="/css/index.css")
   link(rel="stylesheet", href="/css/article.css")
 
 //- 
@@ -18,10 +17,9 @@ block css
     内容
 
 
-block contents
-  include ./layout/tag
+block content
   
-  .layui-container
+  .layui-container.article-block
     .layui-row.layui-col-space15
       //- 文章列表
       .layui-col-md8
@@ -44,16 +42,11 @@ block contents
         .comment.default-box
           fieldset.text-center
               legend 评论
-          div.txt
-            <textarea id="comment-txt"></textarea>
-            button.layui-btn 回复
+          if !session.isNew && session
+            div.txt
+              <textarea id="comment-txt"></textarea>
+              button.layui-btn 回复
           ul.comment-list
-            //- li
-            //-   img(src="/img/user2.jpg")
-            //-   div
-            //-     p.author 评论用户名
-            //-     p.time 2018-06-29 13:19:13
-            //-   .she-said 这是评论的内容
             each info in comment
               li
                 img(src=info.author.avatar)

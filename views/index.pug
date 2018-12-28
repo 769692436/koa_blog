@@ -22,7 +22,7 @@ block content
                 span= item.createTime.toLocaleString()
                 span.list-reply
                   i(title="评论").layui-icon.layui-icon-dialogue
-            
+                  = item.commentNum
           
         include ./layout/laypage
         //- 右侧公告
